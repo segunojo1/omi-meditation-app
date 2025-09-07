@@ -17,6 +17,7 @@ const AffirmationPage = () => {
   const { itemId } = useLocalSearchParams();
 
   const [affirmation, setAffirmation] = useState<GalleryPreviewData>();
+  const [sentences, setSentences] = useState<string[]>()
 
   useEffect(() => {
     for (let index = 0; index < AFFIRMATION_GALLERY.length; index++) {
@@ -30,9 +31,11 @@ const AffirmationPage = () => {
         
         const affirmArray = affirmationToStart.text.split(".")
 
-        if (affirmArray[affirmArray.length - 1 == ]) {
-            
+        if (affirmArray[affirmArray.length - 1 ] == "") {
+            affirmArray.pop()
         }
+
+        setSentences(affirmArray)
       }
     }
   }, []);
@@ -55,7 +58,11 @@ const AffirmationPage = () => {
           >
             <View className="h-full justify-center" style={styles.container2}>
               <View className="h-4/5 justify-center" style={styles.container3}>
-                <Text style={styles.text}>{affirmation?.text}</Text>
+              {
+                sentences?.map((sentence, index) => (
+                  <Text key={index} style={styles.text}>{sentence}.</Text>
+                )) 
+              }
               </View>
             </View>
           </ScrollView>
