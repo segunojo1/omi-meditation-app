@@ -5,7 +5,7 @@ import {
   ImageBackground,
   Pressable,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import meditationImages from "@/constants/meditation-images";
 import AppGradient from "@/components/AppGradient";
 import { router, useLocalSearchParams } from "expo-router";
@@ -13,26 +13,28 @@ import { AntDesign } from "@expo/vector-icons";
 import CustomButton from "@/components/CustomButton";
 import { AUDIO_FILES, MEDITATION_DATA } from "@/constants/MeditationData";
 import { Audio } from "expo-av";
+import { TimerContext } from "@/context/TimerContext";
 
 const Meditate = () => {
   const { id } = useLocalSearchParams();
-  const [secondsRemaining, setSecondsRemaining] = useState(10);
+  const {duration, setDuration} = useContext(TimerContext) 
+  // const [secondsRemaining, setSecondsRemaining] = useState(10);
   const [isMeditating, setIsMeditating] = useState(false);
   const [audioSound, setAudioSound] = useState<Audio.Sound>()
   const [isPlaying, setIsPlaying] = useState(false)
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (secondsRemaining == 0) {
+    if (duration == 0) {
       setIsMeditating(false);
       return;
     }
     if (isMeditating) {
       timer = setInterval(() => {
-        setSecondsRemaining((prev) => prev - 1);
+        setDuration((prev) => prev - 1);
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [secondsRemaining, isMeditating]);
+  }, [duration, isMeditating]);
 
   useEffect(() => {
 
@@ -42,8 +44,8 @@ const Meditate = () => {
   }, [audioSound])
 
   const toggleMeditating = async () => {
-    if (secondsRemaining == 0) {
-      setSecondsRemaining(10)
+    if (duration == 0) {
+      setDuration(10)
     }
     setIsMeditating(!isMeditating)
 
@@ -85,8 +87,8 @@ const Meditate = () => {
     router.push("/(modal)/adjust-duration")
   }
 
-  const formattedTimeMinutes = String(Math.floor(secondsRemaining / 60)).padStart(2, "0");
-  const formattedTimeSeconds = String(secondsRemaining % 60).padStart(2, "0");
+  const formattedTimeMinutes = String(Math.floor(duration / 60)).padStart(2, "0");
+  const formattedTimeSeconds = String(duration % 60).padStart(2, "0");
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -112,7 +114,7 @@ const Meditate = () => {
               onPress={handleDuration}
             />
             <CustomButton
-              title="Start meditation"
+              title={isMeditating ? "Pause Meditating" : "Start Meditating"}
               onPress={toggleMeditating}
               containerStyles="mt-4"
             />

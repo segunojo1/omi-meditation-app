@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         minHeight: 62,
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 16
     },
     touchableText: {
         fontSize: 16,
