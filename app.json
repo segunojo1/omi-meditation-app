@@ -21,7 +21,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.segun0x.omimeditationapp"
     },
     "web": {
       "bundler": "metro",
@@ -42,6 +43,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "01d51104-192b-46ce-be89-effad222813a"
+      }
+    },
+    "owner": "segun0x"
   }
 }

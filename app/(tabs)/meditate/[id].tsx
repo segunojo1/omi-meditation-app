@@ -117,7 +117,7 @@ const Meditate = () => {
               title={isMeditating ? "Pause Meditating" : "Start Meditating"}
               onPress={toggleMeditating}
               containerStyles="mt-4"
-            />
+            /> 
           </View>
         </AppGradient>
       </ImageBackground>
