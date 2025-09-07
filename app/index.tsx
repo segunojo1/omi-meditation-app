@@ -69,8 +69,6 @@ const styles = StyleSheet.create({
   },
   safeview: {
     flex: 1,
-    marginHorizontal: 20,
-    marginVertical: 48,
     justifyContent: "space-between",
   },
 });
