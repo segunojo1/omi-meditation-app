@@ -22,7 +22,7 @@ const GuidedAffirmationsGallery = ({
   return (
     <View style={styles.container}>
       <View style={styles.header} className="">
-        <Text style={styles.text}>GuidedAffirmationsGallery</Text>
+        <Text style={styles.text}>{title}</Text>
       </View>
       <View style={styles.previewContainer}>
         <FlatList
@@ -38,6 +38,7 @@ const GuidedAffirmationsGallery = ({
               </Pressable>
             </Link>
           )}
+          horizontal
         />
       </View>
     </View>
@@ -64,6 +65,10 @@ const styles = StyleSheet.create({
     width: 128,
     borderRadius: 6,
     marginRight: 16,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
 });
 
