@@ -34,6 +34,13 @@ const Meditate = () => {
     return () => clearInterval(timer);
   }, [secondsRemaining, isMeditating]);
 
+  useEffect(() => {
+
+    return () => {
+      audioSound?.unloadAsync()
+    }
+  }, [audioSound])
+
   const toggleMeditating = async () => {
     if (secondsRemaining == 0) {
       setSecondsRemaining(10)
@@ -45,11 +52,13 @@ const Meditate = () => {
 
   
 
+
+
   const toggleSound = async () => {
     const sound = audioSound ? audioSound : await initializeSound();
 
-    const status = await sound.getStatusAsync()
-    if (status.isLoaded && !isPlaying) {
+    const status = await sound?.getStatusAsync()
+    if (status?.isLoaded && !isPlaying) {
       await sound.playAsync()
       setIsPlaying(true)
     } else {
@@ -67,6 +76,13 @@ const Meditate = () => {
 
       setAudioSound(sound)
       return sound
+  }
+
+  const handleDuration  = () => {
+    if (isMeditating) {
+      toggleMeditating()
+    }
+    router.push("/(modal)/adjust-duration")
   }
 
   const formattedTimeMinutes = String(Math.floor(secondsRemaining / 60)).padStart(2, "0");
@@ -92,8 +108,13 @@ const Meditate = () => {
 
           <View className="mb-5">
             <CustomButton
+              title="Adjust duration"
+              onPress={handleDuration}
+            />
+            <CustomButton
               title="Start meditation"
               onPress={toggleMeditating}
+              containerStyles="mt-4"
             />
           </View>
         </AppGradient>

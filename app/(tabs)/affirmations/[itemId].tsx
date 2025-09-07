@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   container3: {
-    height: 4/5,
+    height: 300,
     justifyContent: "center"
   },
   text: {
