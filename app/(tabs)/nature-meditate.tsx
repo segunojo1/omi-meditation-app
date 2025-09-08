@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#e0e7ff",
     marginBottom: 3,
-    fontWeight: "medium",
+    fontWeight: '500',
   },
   pressable: {
     height: 128,

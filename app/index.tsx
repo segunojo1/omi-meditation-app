@@ -1,6 +1,6 @@
 import "./globals.css";
 import { View, Text, ImageBackground, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 
@@ -9,9 +9,21 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "@/components/CustomButton";
 import { useRouter } from "expo-router";
 import AppGradient from "@/components/AppGradient";
+import Auth from "@/components/Auth";
+import { supabase } from "@/lib/supabase";
+import { Session } from "@supabase/supabase-js";
 
 const App = () => {
   const router = useRouter();
+  const [session, setSession] = useState<Session | null>(null)
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
   return (
     <View className="flex-1" style={styles.container}>
       <ImageBackground
@@ -20,7 +32,7 @@ const App = () => {
         style={styles.imgContainer}
         className="flex-1"
       >
-        <AppGradient colors={["rgba(0, 0, 0, 0.4)", "rgba(0, 0, 0, 0.8)"]}>
+        {/* <AppGradient colors={["rgba(0, 0, 0, 0.4)", "rgba(0, 0, 0, 0.8)"]}> */}
           
             <SafeAreaView style={styles.safeview}>
               <View>
@@ -28,19 +40,22 @@ const App = () => {
                 <Text className="" style={styles.smallText}>
                   Experience Meditation like never before
                 </Text>
+                {session && session.user && <Text style={styles.text}>{session.user.id}</Text>}
+
               </View>
               <View>
+              
                 <CustomButton
                   onPress={() => {
-                    router.push("/nature-meditate");
+                    router.push("/auth");
                   }}
                   title="Get Started"
                 />
               </View>
               <StatusBar style="light" />
             </SafeAreaView>
-        </AppGradient>
-      </ImageBackground>
+        {/* </AppGradient> */}
+      </ImageBackground> 
     </View>
   );
 };

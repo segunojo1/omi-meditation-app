@@ -1,11 +1,13 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState, Dispatch, SetStateAction } from "react";
+
 interface TimerContextProps {
     duration: number;
-    setDuration: (duration: number) => void;
+    setDuration: Dispatch<SetStateAction<number>>;
 }
+
 export const TimerContext = createContext<TimerContextProps>({
     duration: 10,
-    setDuration: (duration: number) => {},
+    setDuration: () => {},
 })
 
 interface TimerProviderProps {
@@ -13,7 +15,7 @@ interface TimerProviderProps {
 }
 
 const TimerProvider = ({ children }: TimerProviderProps) => {
-    const [duration, setDuration] = useState(10);
+    const [duration, setDuration] = useState<number>(10);
     return (
         <TimerContext.Provider value={{ duration, setDuration }}>
             {children}
