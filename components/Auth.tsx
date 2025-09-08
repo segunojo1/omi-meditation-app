@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View } from 'react-native'
+import { Alert, StyleSheet, TextInput, View } from 'react-native'
 import { supabase } from '../lib/supabase'
-import { Button, Input } from '@rneui/themed'
 import CustomButton from './CustomButton'
 import { useRouter } from 'expo-router'
 
@@ -63,36 +62,27 @@ export default function Auth() {
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input
-          label="Email"
-          leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+        <Text style={styles.label}>Email</Text>
+        <TextInput
           onChangeText={(text) => setEmail(text)}
           value={email}
           placeholder="email@address.com"
-          autoCapitalize={'none'}
-          containerStyle={styles.inputContainerOuter}
-          inputContainerStyle={styles.inputContainer}
-          inputStyle={styles.inputText}
-          labelStyle={styles.label}
-          leftIconContainerStyle={styles.leftIcon}
           placeholderTextColor="#6b7280"
+          autoCapitalize="none"
+          keyboardType="email-address"
+          style={[styles.input, styles.inputText]}
         />
       </View>
       <View style={styles.verticallySpaced}>
-        <Input
-          label="Password"
-          leftIcon={{ type: 'font-awesome', name: 'lock' }}
+        <Text style={styles.label}>Password</Text>
+        <TextInput
           onChangeText={(text) => setPassword(text)}
           value={password}
           secureTextEntry={true}
           placeholder="Password"
-          autoCapitalize={'none'}
-          containerStyle={styles.inputContainerOuter}
-          inputContainerStyle={styles.inputContainer}
-          inputStyle={styles.inputText}
-          labelStyle={styles.label}
-          leftIconContainerStyle={styles.leftIcon}
           placeholderTextColor="#6b7280"
+          autoCapitalize="none"
+          style={[styles.input, styles.inputText]}
         />
       </View>
       <View style={[styles.verticallySpaced, styles.mt20]}>
@@ -118,19 +108,17 @@ const styles = StyleSheet.create({
   mt20: {
     marginTop: 20,
   },
-  inputContainerOuter: {
-    paddingHorizontal: 0,
-    borderBottomWidth: 0,
-  },
-  inputContainer: {
+  input: {
     backgroundColor: 'rgba(255,255,255,0.9)',
     borderRadius: 10,
-    paddingHorizontal: 12,
-    borderBottomWidth: 0,
+    padding: 12,
     minHeight: 48,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    marginBottom: 8,
+    fontSize: 16,
   },
   inputText: {
-    fontSize: 16,
     color: '#111827',
   },
   label: {
@@ -138,9 +126,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontWeight: '700',
     fontSize: 18
-  },
-  leftIcon: {
-    marginRight: 8,
   },
   button: {
     backgroundColor: '#fff',
