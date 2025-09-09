@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, TextInput, View } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
 import { supabase } from '../lib/supabase'
 import CustomButton from './CustomButton'
 import { useRouter } from 'expo-router'
