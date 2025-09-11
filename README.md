@@ -15,8 +15,8 @@ A beautiful meditation app that helps you relax, focus, and practice mindfulness
 
 ## 📱 Screens
 
-1. **Welcome Screen** - Landing page with sign-in/sign-up options
-2. **Authentication** - Secure login and registration
+1. **Welcome Screen** - Landing page with welcome screen
+2. **Authentication** - join as guest
 3. **Meditation Screen** - Browse and select meditation themes
 4. **Meditation Player** - Timer with background audio and duration controls
 5. **Affirmations** - Browse and read positive affirmations
@@ -64,9 +64,7 @@ A beautiful meditation app that helps you relax, focus, and practice mindfulness
 
 ### Getting Started
 1. Open the app on your device
-2. Choose to either:
-   - **Sign Up** (create an account to save your progress)
-   - **Sign In** (if you already have an account)
+2. Choose to:
    - **Use as Guest** (start meditating immediately)
 
 ### Meditating
